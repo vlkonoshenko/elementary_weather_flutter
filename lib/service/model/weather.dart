@@ -53,18 +53,26 @@ enum WindDirectionCompass {
 @JsonSerializable()
 class Weather {
   final int id;
+  @JsonKey(name: 'weather_state_name')
   final String weatherStateName;
-  @JsonKey(unknownEnumValue: WeatherState.unknown)
+  @JsonKey(name: 'weather_state_abbr', unknownEnumValue: WeatherState.unknown)
   final WeatherState weatherStateAbbr;
-  @JsonKey(unknownEnumValue: WindDirectionCompass.unknown)
+  @JsonKey(name: 'wind_direction_compass',unknownEnumValue: WindDirectionCompass.unknown)
   final WindDirectionCompass windDirectionCompass;
   final DateTime created;
+  @JsonKey(name: 'applicable_date')
   final DateTime applicableDate;
+  @JsonKey(name: 'min_temp')
   final double minTemp;
+  @JsonKey(name: 'max_temp')
   final double maxTemp;
+  @JsonKey(name: 'the_temp')
   final double theTemp;
+  @JsonKey(name: 'wind_speed')
   final double windSpeed;
+  @JsonKey(name: 'wind_direction')
   final double windDirection;
+  @JsonKey(name: 'air_pressure')
   final double airPressure;
   final int humidity;
   final double visibility;
