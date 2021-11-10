@@ -5,10 +5,10 @@ import 'package:dio/dio.dart';
 import 'model/location.dart';
 import 'model/weather.dart';
 
-const _baseUrl = 'https://www.metaweather.com';
+const baseUrl = 'https://www.metaweather.com';
 
 class WeatherService {
-  final dio = Dio(BaseOptions(baseUrl: _baseUrl));
+  final dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   // ignore:avoid_annotating_with_dynamic
   Future<List<Location>> locationSearch(String query) async {
