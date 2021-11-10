@@ -22,7 +22,7 @@ class WeatherApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WeatherScreen(title: 'Flutter Demo Home Page'),
+      home: const WeatherScreen(),
     );
   }
 }
