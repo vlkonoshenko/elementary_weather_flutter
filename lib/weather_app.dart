@@ -1,6 +1,6 @@
+import 'package:elementary_weather_flutter/ui/select_address_screen/select_address_screen.dart';
+import 'package:elementary_weather_flutter/ui/weather_details_screen/weather_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'ui/weather_screen.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({Key? key}) : super(key: key);
@@ -11,18 +11,9 @@ class WeatherApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WeatherScreen(),
+      home: const SelectAddressScreen(),
     );
   }
 }
