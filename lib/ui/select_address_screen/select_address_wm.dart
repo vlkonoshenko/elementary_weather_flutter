@@ -33,7 +33,7 @@ class SelectAddressWM
   void onTapLocation(Location e) {
     model.saveLocation(e);
     Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (_) => WeatherScreen()));
+        .push(MaterialPageRoute<void>(builder: (_) => const WeatherScreen()));
   }
 }
 

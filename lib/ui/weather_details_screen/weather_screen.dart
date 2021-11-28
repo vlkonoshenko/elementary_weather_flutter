@@ -1,5 +1,7 @@
 import 'package:elementary/elementary.dart';
+import 'package:elementary_weather_flutter/ui/loading_page/loading_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../service/model/weather.dart';
 import '../../service/weather_service.dart';
@@ -20,14 +22,14 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
             valueListenable: wm.currentWeather,
             builder: (_, data, __) {
               if (data == null) {
-                return const CircularProgressIndicator();
+                return const LoadingPage();
               }
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
-                    '$baseUrl/static/img/weather/png/${data.weatherStateAbbr.abbr}.png',
+                  Image.asset(
+                    'assets/weather/${data.weatherStateAbbr.abbr}.png',
                     height: 100,
                     width: 100,
                   ),
