@@ -10,6 +10,7 @@ class WeatherApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Gilroy',
         primarySwatch: Colors.blue,
       ),
       home: const SelectAddressScreen(),

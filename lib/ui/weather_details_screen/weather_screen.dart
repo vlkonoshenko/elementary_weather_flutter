@@ -1,10 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:elementary_weather_flutter/ui/loading_page/loading_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../service/model/weather.dart';
-import '../../service/weather_service.dart';
 import 'weather_screen_wm.dart';
 
 class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
@@ -18,7 +16,7 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: ValueListenableBuilder<Weather?>(
+          child: ValueListenableBuilder<List<Weather>?>(
             valueListenable: wm.currentWeather,
             builder: (_, data, __) {
               if (data == null) {
@@ -28,14 +26,37 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/weather/${data.weatherStateAbbr.abbr}.png',
-                    height: 100,
-                    width: 100,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Colors.blue,
+                        Colors.green,
+                        Colors.red,
+                      ],
+                    )),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/weather/${data.first.weatherStateAbbr.abbr}.png',
+                          height: 100,
+                          width: 100,
+                        ),
+                        Text(wm.locationTitle),
+                        Text(data.first.weatherStateName),
+                      ],
+                    ),
                   ),
-                  Text(wm.locationTitle),
-                  Text(data.weatherStateName),
-                  Text(data.theTemp.toString()),
+                  Text('This week'),
+                  Expanded(
+                    child: ListView(
+                      children:
+                          data.map((e) => Text(e.maxTemp.toString())).toList(),
+                    ),
+                  ),
                 ],
               );
             },

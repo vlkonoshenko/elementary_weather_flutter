@@ -10,7 +10,7 @@ import 'weather_screen.dart';
 import 'weather_screen_model.dart';
 
 class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel> {
-  ValueListenable<Weather?> get currentWeather => model.weather;
+  ValueListenable<List<Weather>?> get currentWeather => model.weather;
 
   String get locationTitle => model.location?.title ?? '';
 

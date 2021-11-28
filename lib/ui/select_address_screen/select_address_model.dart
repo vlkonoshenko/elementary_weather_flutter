@@ -9,8 +9,6 @@ class SelectAddressModel extends ElementaryModel {
   final ValueNotifier<List<Location>> predictions = ValueNotifier([]);
   final AppModel _appModel;
 
-
-
   SelectAddressModel(this.addressService, this._appModel);
 
   void onTextChanged(String text) {
@@ -22,5 +20,4 @@ class SelectAddressModel extends ElementaryModel {
   void saveLocation(Location location) {
     _appModel.selectedLocation = location;
   }
-
 }
