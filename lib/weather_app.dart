@@ -1,5 +1,4 @@
 import 'package:elementary_weather_flutter/ui/select_address_screen/select_address_screen.dart';
-import 'package:elementary_weather_flutter/ui/weather_details_screen/weather_screen.dart';
 import 'package:flutter/material.dart';
 
 class WeatherApp extends StatelessWidget {
