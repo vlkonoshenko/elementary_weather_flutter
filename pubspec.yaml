@@ -32,8 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.23.0+1
-  intl: ^0.17.0
   get_it: ^7.2.0
+  intl: ^0.17.0
   json_annotation: ^4.1.0
 
 dev_dependencies:
@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/image/
     - assets/weather/
+    - assets/icon/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

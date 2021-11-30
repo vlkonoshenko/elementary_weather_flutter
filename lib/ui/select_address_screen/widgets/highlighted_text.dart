@@ -1,3 +1,4 @@
+import 'package:elementary_weather_flutter/theme/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class HighlightedText extends StatelessWidget {
@@ -13,7 +14,7 @@ class HighlightedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spans = matcher.isNotEmpty
-        ? _highlightOccurrences(context, text, matcher)
+        ? _highlightOccurrences(text, matcher)
         : <TextSpan>[];
 
     return RichText(
@@ -24,7 +25,6 @@ class HighlightedText extends StatelessWidget {
   }
 
   List<TextSpan> _highlightOccurrences(
-    BuildContext context,
     String source,
     String query,
   ) {
@@ -40,9 +40,9 @@ class HighlightedText extends StatelessWidget {
       return [];
     }
 
-    final defaultStyle = Theme.of(context).textTheme.bodyText2;
+    final defaultStyle = AppTypography.body;
 
-    final matchStyle = defaultStyle?.copyWith(fontWeight: FontWeight.w800);
+    final matchStyle = defaultStyle.copyWith(fontWeight: FontWeight.w800);
 
     var lastMatchEnd = 0;
     final spans = <TextSpan>[];

@@ -1,10 +1,12 @@
 import 'package:elementary/elementary.dart';
-import 'package:elementary_weather_flutter/ui/loading_page/loading_page.dart';
+import 'package:elementary_weather_flutter/theme/app_typography.dart';
+import 'package:elementary_weather_flutter/ui/loading_screen/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../service/model/weather.dart';
 import 'weather_screen_wm.dart';
+import 'widgets/weather_forecast_tile.dart';
 
 class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
   const WeatherScreen({
@@ -30,19 +32,14 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
                 Container(
                   width: double.infinity,
                   height: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      bottom: Radius.circular(24),
-                    ),
-                    gradient: LinearGradient(
-                      stops: const [0.2, 1.2, 1],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                      colors: [
-                        Colors.blue,
-                        Colors.blue.shade100,
-                        Colors.blueAccent,
-                      ],
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/image/bg.png',
+                      ),
+                      colorFilter:
+                          ColorFilter.mode(Colors.black12, BlendMode.color),
+                      fit: BoxFit.fill,
                     ),
                   ),
                   child: Column(
@@ -59,19 +56,13 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
                               Text(
                                 DateFormat('EEEE, DD, MMMM')
                                     .format(DateTime.now()),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
+                                style: AppTypography.body
+                                    .copyWith(color: Colors.white),
                               ),
                               Text(
                                 wm.locationTitle,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
+                                style: AppTypography.title
+                                    .copyWith(color: Colors.white),
                               ),
                             ],
                           ),
@@ -81,70 +72,56 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
                         child: Image.asset(
                           'assets/weather/${data.first.weatherStateAbbr.abbr}.png',
                           width: 140,
-                          height: 100,
+                          height: 220,
                           scale: 3,
-                          fit: BoxFit.fitHeight,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          '${data.first.theTemp.round().toString()}°',
+                          style: const TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       Text(
-                        '${data.first.theTemp.round().toString()}°',
+                        '${data.first.weatherStateName} • Humidity ${data.first.humidity}%',
                         style: const TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),
                       ),
-                      Text(data.first.weatherStateName),
                       const SizedBox(height: 16),
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                    'This week',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Text('This week', style: AppTypography.title),
                 ),
                 Expanded(
                   child: ListView.separated(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          const SizedBox(width: 25),
-                          Text(index == 0
-                              ? 'Today'
-                              : DateFormat('EEEE')
-                                  .format(data[index].applicableDate),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),),
-                          const Spacer(),
-                          Image.asset(
-                            'assets/weather/${data[index].weatherStateAbbr.abbr}.png',
-                            height: 40,
-                            width: 40,
-                          ),
-                          const SizedBox(width: 25),
-                          Text(
-                            '${data[index].maxTemp.round().toString()}°',
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(width: 25),
-                        ],
+                      return WeatherForecastTile(
+                        position: index,
+                        weather: data[index],
                       );
                     },
                     itemCount: data.length,
                     separatorBuilder: (context, index) {
                       return const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 25),
-                        child: Divider(thickness: 2,),
+                        child: Divider(
+                          thickness: 1,
+                        ),
                       );
                     },
                   ),

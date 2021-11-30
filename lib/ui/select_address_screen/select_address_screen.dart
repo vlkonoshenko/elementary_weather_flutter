@@ -1,9 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:elementary_weather_flutter/service/model/location.dart';
+import 'package:elementary_weather_flutter/theme/app_typography.dart';
+import 'package:elementary_weather_flutter/ui/select_address_screen/widgets/location_tile.dart';
 import 'package:flutter/material.dart';
 
 import 'select_address_wm.dart';
-import 'widgets/hightlighted_text.dart';
 import 'widgets/search_text_field.dart';
 
 class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
@@ -14,33 +15,41 @@ class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
   Widget build(SelectAddressWM wm) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
-          SearchTextField(
-            controller: wm.controller,
+          const SizedBox(height: 80),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text('Weather', style: AppTypography.header),
           ),
+          const SizedBox(height: 30),
+          SearchTextField(controller: wm.controller),
           Expanded(
             child: ValueListenableBuilder<List<Location>>(
               valueListenable: wm.predictions,
               builder: (_, data, __) {
                 return data.isEmpty
-                    ? const Text('Not found')
-                    : ListView(
-                        children: data
-                            .map((e) => GestureDetector(
-                                  onTap: () => wm.onTapLocation(e),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 32,
-                                      vertical: 12,
-                                    ),
-                                    child: HighlightedText(
-                                      text: e.title,
-                                      matcher: wm.controller.text,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
+                    ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Please change searching request',
+                          style: AppTypography.body,
+                        ),
+                      ],
+                    )
+                    : SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (final location in data)
+                              LocationTile(
+                                location: location,
+                                requestString: wm.controller.text,
+                                onClick: wm.onTapLocation,
+                              ),
+                          ],
+                        ),
                       );
               },
             ),
