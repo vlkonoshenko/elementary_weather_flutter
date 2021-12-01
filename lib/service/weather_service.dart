@@ -17,8 +17,9 @@ class WeatherService {
 
     final weatherJson = bodyJson['consolidated_weather'] as List;
 
-    return weatherJson
-        .map((dynamic e) => Weather.fromJson(e as Map<String, dynamic>))
-        .toList();
+    return [
+      for (final weather in weatherJson)
+        Weather.fromJson(weather as Map<String, dynamic>),
+    ];
   }
 }

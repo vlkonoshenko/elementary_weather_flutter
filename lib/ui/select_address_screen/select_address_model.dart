@@ -11,13 +11,14 @@ class SelectAddressModel extends ElementaryModel {
 
   SelectAddressModel(this.addressService, this._appModel);
 
+  void saveLocation(Location location) {
+    debugPrint(location.toString());
+    _appModel.selectedLocation = location;
+  }
+
   void onTextChanged(String text) {
     addressService
         .locationSearch(text)
         .then((value) => predictions.value = value);
-  }
-
-  void saveLocation(Location location) {
-    _appModel.selectedLocation = location;
   }
 }

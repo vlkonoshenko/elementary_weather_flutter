@@ -18,9 +18,9 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
   Widget build(WeatherScreenWM wm) {
     return Scaffold(
       body: Center(
-        child: ValueListenableBuilder<List<Weather>?>(
-          valueListenable: wm.currentWeather,
-          builder: (_, data, __) {
+        child: EntityStateNotifierBuilder<List<Weather>?>(
+          listenableEntityState: wm.currentWeather,
+          builder: (_, data) {
             if (data == null) {
               return const LoadingPage();
             }
@@ -44,9 +44,7 @@ class WeatherScreen extends ElementaryWidget<WeatherScreenWM> {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: MediaQuery.of(wm.context).padding.top + 16,
-                      ),
+                      SizedBox(height: wm.topPadding),
                       Row(
                         children: [
                           const SizedBox(width: 25),
