@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
 import 'package:elementary_weather_flutter/app_model.dart';
 import 'package:elementary_weather_flutter/service/model/location.dart';
@@ -20,11 +21,16 @@ class WeatherScreenModel extends ElementaryModel {
   @override
   void init() {
     super.init();
-
-    getWeather().then(_currentWeather.content);
+    getWeather();
   }
 
-  Future<List<Weather>?> getWeather() {
-    return weatherService.getWeather(location?.woeid ?? 0);
+  Future<void> getWeather() async {
+    try {
+      _currentWeather.loading();
+      final weather = await weatherService.getWeather(location?.woeid ?? 0);
+      _currentWeather.content(weather);
+    } on DioError catch (err) {
+      _currentWeather.error(err);
+    }
   }
 }

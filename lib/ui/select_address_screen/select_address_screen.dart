@@ -23,7 +23,7 @@ class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
             child: Text('Weather', style: AppTypography.header),
           ),
           const SizedBox(height: 30),
-          SearchTextField(controller: wm.controller),
+          SearchTextField(controller: wm.searchFieldController),
           Expanded(
             child: ValueListenableBuilder<List<Location>>(
               valueListenable: wm.predictions,
@@ -45,7 +45,7 @@ class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
                             for (final location in data)
                               LocationTile(
                                 location: location,
-                                requestString: wm.controller.text,
+                                requestString: wm.searchFieldController.text,
                                 onClick: wm.onTapLocation,
                               ),
                           ],

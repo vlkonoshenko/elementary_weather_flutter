@@ -13,8 +13,8 @@ import 'select_address_screen.dart';
 
 class SelectAddressWM
     extends WidgetModel<SelectAddressScreen, SelectAddressModel> {
-  TextEditingController controller = TextEditingController();
 
+  TextEditingController searchFieldController = TextEditingController();
   ValueListenable<List<Location>> get predictions => model.predictions;
 
   SelectAddressWM(SelectAddressModel model) : super(model);
@@ -23,19 +23,24 @@ class SelectAddressWM
   void initWidgetModel() {
     super.initWidgetModel();
 
-    controller.addListener(onTextChanged);
+    searchFieldController.addListener(onTextChanged);
   }
 
   void onTextChanged() {
-    model.onTextChanged(controller.text);
+    model.onSearchTextChanged(searchFieldController.text);
   }
 
   void onTapLocation(Location e) {
-    model.saveLocation(e);
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(builder: (_) => const WeatherScreen()));
+    model.onLocationSelected(e);
+    Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => const WeatherScreen(),
+    ));
   }
 }
 
-SelectAddressWM createSelectAddressWM(BuildContext _) =>
-    SelectAddressWM(SelectAddressModel(AddressService(), getIt<AppModel>()));
+SelectAddressWM createSelectAddressWM(BuildContext _) => SelectAddressWM(
+      SelectAddressModel(
+        AddressService(),
+        getIt<AppModel>(),
+      ),
+    );

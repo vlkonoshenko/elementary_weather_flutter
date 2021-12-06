@@ -17,6 +17,10 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel> {
   double get topPadding => MediaQuery.of(context).padding.top + 16;
   WeatherScreenWM(WeatherScreenModel model) : super(model);
 
+
+  void onRetryPressed() {
+    model.getWeather();
+  }
 }
 
 WeatherScreenWM createWeatherScreenWM(BuildContext _) => WeatherScreenWM(
