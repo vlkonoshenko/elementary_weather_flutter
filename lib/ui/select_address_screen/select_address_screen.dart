@@ -30,14 +30,14 @@ class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
               builder: (_, data, __) {
                 return data.isEmpty
                     ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Please change searching request',
-                          style: AppTypography.body,
-                        ),
-                      ],
-                    )
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Please change searching request',
+                            style: AppTypography.body,
+                          ),
+                        ],
+                      )
                     : SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

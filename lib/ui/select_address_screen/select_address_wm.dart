@@ -13,7 +13,6 @@ import 'select_address_screen.dart';
 
 class SelectAddressWM
     extends WidgetModel<SelectAddressScreen, SelectAddressModel> {
-
   TextEditingController searchFieldController = TextEditingController();
   ValueListenable<List<Location>> get predictions => model.predictions;
 
