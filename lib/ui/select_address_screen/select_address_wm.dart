@@ -26,7 +26,7 @@ class SelectAddressWM
   }
 
   void onTextChanged() {
-    model.onSearchTextChanged(searchFieldController.text);
+    model.getCityPrediction(searchFieldController.text);
   }
 
   void onTapLocation(Location e) {

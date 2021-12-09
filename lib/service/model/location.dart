@@ -1,21 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'location_type.dart';
+
 part 'location.g.dart';
 
-enum LocationType {
-  @JsonValue('City')
-  city,
-  @JsonValue('Region')
-  region,
-  @JsonValue('State')
-  state,
-  @JsonValue('Province')
-  province,
-  @JsonValue('Country')
-  country,
-  @JsonValue('Continent')
-  continent,
-}
+
 
 @JsonSerializable()
 class Location {

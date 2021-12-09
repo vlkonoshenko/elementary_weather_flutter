@@ -10,7 +10,7 @@ class AddressService {
   final dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   // ignore:avoid_annotating_with_dynamic
-  Future<List<Location>> locationSearch(String query) async {
+  Future<List<Location>> getCityPredictions(String query) async {
     final locationResponse = await dio.get<String>(
       '/api/location/search/?query=$query',
     );
