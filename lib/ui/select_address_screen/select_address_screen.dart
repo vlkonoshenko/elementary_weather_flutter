@@ -8,8 +8,10 @@ import 'select_address_wm.dart';
 import 'widgets/search_text_field.dart';
 
 class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
-  const SelectAddressScreen({Key? key})
-      : super(createSelectAddressWM, key: key);
+  const SelectAddressScreen({
+    Key? key,
+    WidgetModelFactory wmFactory = createSelectAddressWM,
+  }) : super(wmFactory, key: key);
 
   @override
   Widget build(SelectAddressWM wm) {

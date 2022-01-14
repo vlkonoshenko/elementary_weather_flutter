@@ -2,7 +2,6 @@ import 'package:elementary_weather_flutter/service/model/weather.dart';
 import 'package:elementary_weather_flutter/theme/app_typography.dart';
 import 'package:elementary_weather_flutter/ui/weather_details_screen/widgets/weather_forecast_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
