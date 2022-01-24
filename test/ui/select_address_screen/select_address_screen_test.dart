@@ -48,8 +48,6 @@ void main() {
         ),
       ));
 
-      wm.searchFieldController.text = 'tit';
-
       await multiScreenGolden(tester, 'select_address_screen_data');
     });
   });

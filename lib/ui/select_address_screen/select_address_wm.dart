@@ -43,7 +43,7 @@ class SelectAddressWM
   }
 }
 
-SelectAddressWM createSelectAddressWM(BuildContext context) => SelectAddressWM(
+SelectAddressWM createSelectAddressWM(BuildContext _) => SelectAddressWM(
       SelectAddressModel(
         AddressService(),
         getIt<AppModel>(),
