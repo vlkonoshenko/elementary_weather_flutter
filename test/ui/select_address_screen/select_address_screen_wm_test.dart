@@ -34,7 +34,8 @@ void main() {
       navigatorStateMock = NavigationHelperMock();
 
       when(() => modelData.getCityPrediction(any()))
-          .thenAnswer((invocation) => Future.value(<Location>[]));
+          .thenAnswer((invocation) => Future.value());
+
       registerFallbackValue(MaterialPageRoute<void>(builder: (_) {
         return const Center();
       }));

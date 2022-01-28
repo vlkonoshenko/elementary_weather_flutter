@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
 import 'package:elementary_weather_flutter/service/context_helper.dart';
 import 'package:elementary_weather_flutter/service/model/weather.dart';
@@ -14,6 +13,7 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
     implements IWeatherWm {
   final EntityStateNotifier<List<Weather>?> _currentWeather =
       EntityStateNotifier(null);
+  final ContextHelper _contextHelper;
 
   @override
   ListenableState<EntityState<List<Weather>?>> get currentWeather =>
@@ -26,7 +26,6 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
   double get topPadding =>
       _contextHelper.getMediaQuery(context).padding.top + 16;
 
-  final ContextHelper _contextHelper;
   WeatherScreenWM(this._contextHelper, WeatherScreenModel model) : super(model);
 
   @override

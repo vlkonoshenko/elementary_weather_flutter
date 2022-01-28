@@ -1,7 +1,6 @@
 import 'package:elementary_weather_flutter/service/model/location.dart';
 import 'package:elementary_weather_flutter/service/model/location_type.dart';
 import 'package:elementary_weather_flutter/ui/select_address_screen/widgets/location_tile.dart';
-import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 void main() {
@@ -12,33 +11,20 @@ void main() {
     )
       ..addScenario(
         'Default',
-        LocationTile(
-          location: _locationMock,
-          requestString: 'L',
-          onClick: (_) {},
-        ),
+        const LocationTile(location: _locationMock, requestString: 'L'),
       )
       ..addScenario(
-          'Selected',
-          LocationTile(
-            location: _locationMock,
-            requestString: '',
-            onClick: (_) {},
-          ))
+        'Selected',
+        const LocationTile(location: _locationMock, requestString: ''),
+      )
       ..addScenario(
-          'Part Selected',
-          LocationTile(
-            location: _locationMock,
-            requestString: 'title',
-            onClick: (_) {},
-          ))
+        'Part Selected',
+        const LocationTile(location: _locationMock, requestString: 'title'),
+      )
       ..addScenario(
-          'Full',
-          LocationTile(
-            location: _locationMock,
-            requestString: 'long',
-            onClick: (_) {},
-          ));
+        'Full',
+        const LocationTile(location: _locationMock, requestString: 'long'),
+      );
     await tester.pumpWidgetBuilder(builder.build());
     await screenMatchesGolden(tester, 'highlighted_text_state');
   });

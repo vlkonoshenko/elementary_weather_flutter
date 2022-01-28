@@ -6,13 +6,13 @@ import 'highlighted_text.dart';
 class LocationTile extends StatelessWidget {
   final Location location;
   final String requestString;
-  final Function(Location) onClick;
+  final Function(Location)? onClick;
 
   const LocationTile({
     Key? key,
     required this.location,
     required this.requestString,
-    required this.onClick,
+    this.onClick,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,11 @@ class LocationTile extends StatelessWidget {
         text: location.title,
         matcher: requestString,
       ),
-      onTap: () => onClick(location),
+      onTap: () {
+        if (onClick != null) {
+          onClick!(location);
+        }
+      },
     );
   }
 }
