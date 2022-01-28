@@ -17,11 +17,11 @@ class HighlightedText extends StatelessWidget {
         ? _highlightOccurrences(text, matcher)
         : <TextSpan>[];
 
-    return RichText(
+    return Text.rich(RichText(
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       text: spans.isNotEmpty ? TextSpan(children: spans) : TextSpan(text: text),
-    );
+    ).text);
   }
 
   List<TextSpan> _highlightOccurrences(

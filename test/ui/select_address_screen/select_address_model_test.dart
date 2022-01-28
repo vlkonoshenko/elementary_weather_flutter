@@ -8,12 +8,10 @@ import 'package:mocktail/mocktail.dart';
 
 void main() {
   group('AddressModelTest', () {
-    test('onLocationSelected', () {
+    test('onLocationSelected change selectedLocation', () {
       final appModel = AppModel();
-      SelectAddressModel(
-        AddressServiceMock(),
-        appModel,
-      ).onLocationSelected(_locationMock);
+      SelectAddressModel(AddressServiceMock(), appModel)
+          .onLocationSelected(_locationMock);
       expect(appModel.selectedLocation, _locationMock);
     });
 
@@ -23,10 +21,7 @@ void main() {
       when(() => addressServiceMock.getCityPredictions(''))
           .thenAnswer((_) => Future.value([]));
 
-      final model = SelectAddressModel(
-        addressServiceMock,
-        AppModel(),
-      );
+      final model = SelectAddressModel(addressServiceMock, AppModel());
       expect(model.predictions.value, <Location>[]);
       await model.getCityPrediction('');
 
@@ -40,9 +35,9 @@ void main() {
           .thenAnswer((_) => Future.value([_locationMock]));
 
       final model = SelectAddressModel(addressServiceMock, AppModel());
+
       expect(model.predictions.value, <Location>[]);
       await model.getCityPrediction('');
-
       expect(model.predictions.value, <Location>[_locationMock]);
     });
   });

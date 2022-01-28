@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-01-24 12:27:51</td>
+            <td class="headerValue">2022-01-28 09:55:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -70,20 +70,20 @@
 <a name="8"><span class="lineNum">       8 </span>            :   final String requestString;</a>
 <a name="9"><span class="lineNum">       9 </span>            :   final Function(Location) onClick;</a>
 <a name="10"><span class="lineNum">      10 </span>            : </a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          1 :   const LocationTile({</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          2 :   const LocationTile({</span></a>
 <a name="12"><span class="lineNum">      12 </span>            :     Key? key,</a>
 <a name="13"><span class="lineNum">      13 </span>            :     required this.location,</a>
 <a name="14"><span class="lineNum">      14 </span>            :     required this.requestString,</a>
 <a name="15"><span class="lineNum">      15 </span>            :     required this.onClick,</a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          1 :   }) : super(key: key);</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          2 :   }) : super(key: key);</span></a>
 <a name="17"><span class="lineNum">      17 </span>            : </a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          1 :   @override</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          2 :   @override</span></a>
 <a name="19"><span class="lineNum">      19 </span>            :   Widget build(BuildContext context) {</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          1 :     return ListTile(</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          2 :     return ListTile(</span></a>
 <a name="21"><span class="lineNum">      21 </span>            :       contentPadding: const EdgeInsets.symmetric(horizontal: 40),</a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :       title: HighlightedText(</span></a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :         text: location.title,</span></a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          1 :         matcher: requestString,</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :       title: HighlightedText(</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          4 :         text: location.title,</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          2 :         matcher: requestString,</span></a>
 <a name="25"><span class="lineNum">      25 </span>            :       ),</a>
 <a name="26"><span class="lineNum">      26 </span><span class="lineNoCov">          0 :       onTap: () =&gt; onClick(location),</span></a>
 <a name="27"><span class="lineNum">      27 </span>            :     );</a>

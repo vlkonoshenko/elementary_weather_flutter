@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryMed">84.6 %</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-01-24 12:27:51</td>
+            <td class="headerValue">2022-01-28 09:55:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -70,7 +70,7 @@
 <a name="8"><span class="lineNum">       8 </span>            : import 'weather_screen_wm.dart';</a>
 <a name="9"><span class="lineNum">       9 </span>            : </a>
 <a name="10"><span class="lineNum">      10 </span>            : class WeatherScreen extends ElementaryWidget&lt;WeatherScreenWM&gt; {</a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          5 :   const WeatherScreen({</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          9 :   const WeatherScreen({</span></a>
 <a name="12"><span class="lineNum">      12 </span>            :     Key? key,</a>
 <a name="13"><span class="lineNum">      13 </span>            :     WidgetModelFactory&lt;WeatherScreenWM&gt; wmFactory = createWeatherScreenWM,</a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">          1 :   }) : super(wmFactory, key: key);</span></a>
@@ -81,8 +81,8 @@
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">          1 :       body: Center(</span></a>
 <a name="20"><span class="lineNum">      20 </span><span class="lineCov">          1 :         child: EntityStateNotifierBuilder&lt;List&lt;Weather&gt;?&gt;(</span></a>
 <a name="21"><span class="lineNum">      21 </span><span class="lineCov">          1 :           listenableEntityState: wm.currentWeather,</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineNoCov">          0 :           errorBuilder: (_, __, ___) {</span></a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineNoCov">          0 :             return ErrorScreen(onRetryPressed: wm.onRetryPressed);</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :           errorBuilder: (_, __, ___) {</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :             return ErrorScreen(onRetryPressed: wm.onRetryPressed);</span></a>
 <a name="24"><span class="lineNum">      24 </span>            :           },</a>
 <a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :           loadingBuilder: (_, __) {</span></a>
 <a name="26"><span class="lineNum">      26 </span>            :             return const LoadingPage();</a>

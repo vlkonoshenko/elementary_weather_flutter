@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
+import 'package:elementary_weather_flutter/service/context_helper.dart';
 import 'package:elementary_weather_flutter/service/model/weather.dart';
 import 'package:flutter/widgets.dart';
 
@@ -22,9 +23,11 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
   String get locationTitle => model.location?.title ?? '';
 
   @override
-  double get topPadding => MediaQuery.of(context).padding.top + 16;
+  double get topPadding =>
+      _contextHelper.getMediaQuery(context).padding.top + 16;
 
-  WeatherScreenWM(WeatherScreenModel model) : super(model);
+  final ContextHelper _contextHelper;
+  WeatherScreenWM(this._contextHelper, WeatherScreenModel model) : super(model);
 
   @override
   void initWidgetModel() {
@@ -39,13 +42,14 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
       _currentWeather.loading();
       final weather = await model.getWeather();
       _currentWeather.content(weather);
-    } on DioError catch (err) {
+    } on Exception catch (err) {
       _currentWeather.error(err);
     }
   }
 }
 
 WeatherScreenWM createWeatherScreenWM(BuildContext _) => WeatherScreenWM(
+      ContextHelper(),
       WeatherScreenModel(
         WeatherService(),
         getIt<AppModel>().selectedLocation,

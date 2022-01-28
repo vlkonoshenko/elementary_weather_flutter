@@ -16,39 +16,33 @@ void main() {
   group('Select Address Screen', () {
     final model = SelectAddressModelMock();
 
-    testGoldens('Example of testing a responsive layout', (tester) async {
+    testGoldens('Select address screen default golden test', (tester) async {
       when(() => model.predictions)
           .thenAnswer((_) => ValueNotifier<List<Location>>([]));
 
       await tester.pumpWidgetBuilder(SelectAddressScreen(
-        wmFactory: (context) => SelectAddressWM(
-          model,
-          NavigationHelper(),
-        ),
+        wmFactory: (context) => SelectAddressWM(model, NavigationHelper()),
       ));
+
       await multiScreenGolden(tester, 'select_address_screen');
     });
 
-    testGoldens('Example of testing a responsive layout', (tester) async {
+    testGoldens('Select address screen with data golden test', (tester) async {
       when(() => model.predictions)
-          .thenAnswer((_) => ValueNotifier<List<Location>>([
-                const Location(
-                  title: 'title',
-                  locationType: LocationType.city,
-                  latLng: LatLng(longitude: 10.0, latitude: 10.0),
-                  woeid: 1,
-                ),
-              ]));
+          .thenAnswer((_) => ValueNotifier<List<Location>>([_locationMock]));
 
-      late SelectAddressWM wm;
       await tester.pumpWidgetBuilder(SelectAddressScreen(
-        wmFactory: (context) => wm = SelectAddressWM(
-          model,
-          NavigationHelper(),
-        ),
+        wmFactory: (context) => SelectAddressWM(model, NavigationHelper()),
       ));
 
       await multiScreenGolden(tester, 'select_address_screen_data');
     });
   });
 }
+
+const _locationMock = Location(
+  title: 'title',
+  locationType: LocationType.city,
+  latLng: LatLng(longitude: 10.0, latitude: 10.0),
+  woeid: 1,
+);

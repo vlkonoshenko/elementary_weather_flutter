@@ -4,8 +4,6 @@ import 'location_type.dart';
 
 part 'location.g.dart';
 
-
-
 @JsonSerializable()
 class Location {
   final String title;
