@@ -7,43 +7,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  group('AddressModelTest', () {
-    test('onLocationSelected change selectedLocation', () {
-      final appModel = AppModel();
-      SelectAddressModel(AddressServiceMock(), appModel)
-          .onLocationSelected(_locationMock);
-      expect(appModel.selectedLocation, _locationMock);
-    });
+  late AddressServiceMock addressServiceMock;
 
-    test('getCityPrediction return empty list', () async {
-      final addressServiceMock = AddressServiceMock();
+  setUp(() {
+    addressServiceMock = AddressServiceMock();
+  });
 
-      when(() => addressServiceMock.getCityPredictions(''))
-          .thenAnswer((_) => Future.value([]));
+  test('getCityPrediction return empty list', () async {
+    when(() => addressServiceMock.getCityPredictions(''))
+        .thenAnswer((_) => Future.value([]));
 
-      final model = SelectAddressModel(addressServiceMock, AppModel());
-      expect(model.predictions.value, <Location>[]);
-      await model.getCityPrediction('');
+    final model = SelectAddressModel(addressServiceMock, AppModel());
+    expect(model.predictions.value, <Location>[]);
+    await model.getCityPrediction('');
 
-      expect(model.predictions.value, <Location>[]);
-    });
+    expect(model.predictions.value, <Location>[]);
+  });
 
-    test('getCityPrediction return prediction list', () async {
-      final addressServiceMock = AddressServiceMock();
+  test('getCityPrediction return prediction list', () async {
+    when(() => addressServiceMock.getCityPredictions(''))
+        .thenAnswer((_) => Future.value([_locationMock]));
 
-      when(() => addressServiceMock.getCityPredictions(''))
-          .thenAnswer((_) => Future.value([_locationMock]));
+    final model = SelectAddressModel(addressServiceMock, AppModel());
 
-      final model = SelectAddressModel(addressServiceMock, AppModel());
-
-      expect(model.predictions.value, <Location>[]);
-      await model.getCityPrediction('');
-      expect(model.predictions.value, <Location>[_locationMock]);
-    });
+    expect(model.predictions.value, <Location>[]);
+    await model.getCityPrediction('');
+    expect(model.predictions.value, <Location>[_locationMock]);
   });
 }
 
 class AddressServiceMock extends Mock implements AddressService {}
+
+class AppModelMock extends Mock implements AppModel {}
 
 const _locationMock = Location(
   title: 'title',

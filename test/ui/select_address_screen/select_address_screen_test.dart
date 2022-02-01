@@ -1,44 +1,40 @@
 import 'package:elementary_weather_flutter/service/model/location.dart';
 import 'package:elementary_weather_flutter/service/model/location_type.dart';
-import 'package:elementary_weather_flutter/service/navigation_helper.dart';
-import 'package:elementary_weather_flutter/ui/select_address_screen/select_address_model.dart';
 import 'package:elementary_weather_flutter/ui/select_address_screen/select_address_screen.dart';
 import 'package:elementary_weather_flutter/ui/select_address_screen/select_address_wm.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 
-class SelectAddressModelMock extends Mock implements SelectAddressModel {}
-
 void main() {
-  group('Select Address Screen', () {
-    final model = SelectAddressModelMock();
+  const selectAddressScreen = SelectAddressScreen();
+  final selectAddressWm = SelectAddressWMMock();
 
-    testGoldens('Select address screen default golden test', (tester) async {
-      when(() => model.predictions)
-          .thenAnswer((_) => ValueNotifier<List<Location>>([]));
+  setUp(() {
+    when(() => selectAddressWm.predictions)
+        .thenAnswer((_) => ValueNotifier<List<Location>>([]));
+    when(() => selectAddressWm.searchFieldController)
+        .thenAnswer((_) => TextEditingController());
+  });
 
-      await tester.pumpWidgetBuilder(SelectAddressScreen(
-        wmFactory: (context) => SelectAddressWM(model, NavigationHelper()),
-      ));
+  testGoldens('Select address screen default golden test', (tester) async {
+    await tester.pumpWidgetBuilder(selectAddressScreen.build(selectAddressWm));
 
-      await multiScreenGolden(tester, 'select_address_screen');
-    });
+    await multiScreenGolden(tester, 'select_address_screen');
+  });
 
-    testGoldens('Select address screen with data golden test', (tester) async {
-      when(() => model.predictions)
-          .thenAnswer((_) => ValueNotifier<List<Location>>([_locationMock]));
+  testGoldens('Select address screen with data golden test', (tester) async {
+    when(() => selectAddressWm.predictions)
+        .thenAnswer((_) => ValueNotifier<List<Location>>([_locationMock]));
 
-      await tester.pumpWidgetBuilder(SelectAddressScreen(
-        wmFactory: (context) => SelectAddressWM(model, NavigationHelper()),
-      ));
+    await tester.pumpWidgetBuilder(selectAddressScreen.build(selectAddressWm));
 
-      await multiScreenGolden(tester, 'select_address_screen_data');
-    });
+    await multiScreenGolden(tester, 'select_address_screen_data');
   });
 }
+
+class SelectAddressWMMock extends Mock implements ISelectAddressWm {}
 
 const _locationMock = Location(
   title: 'title',

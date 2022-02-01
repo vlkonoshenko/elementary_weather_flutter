@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'select_address_wm.dart';
 import 'widgets/search_text_field.dart';
 
-class SelectAddressScreen extends ElementaryWidget<SelectAddressWM> {
+class SelectAddressScreen extends ElementaryWidget<ISelectAddressWm> {
   const SelectAddressScreen({
     Key? key,
     WidgetModelFactory wmFactory = createSelectAddressWM,
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(SelectAddressWM wm) {
+  Widget build(ISelectAddressWm wm) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

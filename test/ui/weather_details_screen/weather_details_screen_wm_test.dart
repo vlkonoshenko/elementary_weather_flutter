@@ -20,13 +20,9 @@ void main() {
       getIt.registerSingleton<AppModel>(AppModel());
     });
 
-    test(
-      'createWeatherScreenWM',
-      () {
-        final wm = createWeatherScreenWM(BuildContextMock());
-        expect(wm, isNotNull);
-      },
-    );
+    test('createWeatherScreenWM', () {
+      expect(() => createWeatherScreenWM(BuildContextMock()), returnsNormally);
+    });
   });
 
   group('WeatherScreenWM', () {

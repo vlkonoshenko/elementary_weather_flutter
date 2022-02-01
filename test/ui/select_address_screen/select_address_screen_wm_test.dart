@@ -20,8 +20,7 @@ void main() {
     });
 
     test('createSelectAddressWM', () {
-      final wm = createSelectAddressWM(BuildContextMock());
-      expect(wm, isNotNull);
+      expect(() => createSelectAddressWM(BuildContextMock()), returnsNormally);
     });
   });
 
@@ -62,7 +61,7 @@ void main() {
       setupWm,
       (wm, tester, context) async {
         tester.init();
-        wm.onTextChanged();
+        wm.searchFieldController.text = 'Test';
 
         verify(() => modelData.getCityPrediction(any()));
       },
