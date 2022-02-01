@@ -34,6 +34,7 @@ class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
     _loadWeather();
   }
 
+  @override
   void onRetryPressed() => _loadWeather();
 
   Future<void> _loadWeather() async {
@@ -61,4 +62,6 @@ abstract class IWeatherWm extends IWidgetModel {
   double get topPadding;
 
   String get locationTitle;
+
+  void onRetryPressed();
 }

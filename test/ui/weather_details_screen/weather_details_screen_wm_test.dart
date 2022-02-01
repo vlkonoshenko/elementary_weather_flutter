@@ -26,18 +26,12 @@ void main() {
   });
 
   group('WeatherScreenWM', () {
-    late WeatherScreenModelMock modelData;
-    late ContextHelperMock contextHelperMock;
-
-    setUp(() {
-      modelData = WeatherScreenModelMock();
-      contextHelperMock = ContextHelperMock();
-
-      when(() => modelData.getWeather())
-          .thenAnswer((invocation) => Future.value([]));
-    });
+    final modelData = WeatherScreenModelMock();
+    final contextHelperMock = ContextHelperMock();
 
     WeatherScreenWM setupWm() {
+      when(modelData.getWeather).thenAnswer((invocation) => Future.value([]));
+
       return WeatherScreenWM(contextHelperMock, modelData);
     }
 
@@ -47,7 +41,7 @@ void main() {
       (wm, tester, context) async {
         tester.init();
 
-        verify(() => modelData.getWeather());
+        verify(modelData.getWeather);
       },
     );
 
@@ -57,8 +51,9 @@ void main() {
       (wm, tester, context) async {
         tester.init();
 
-        when(() => contextHelperMock.getMediaQuery(context))
-            .thenReturn(const MediaQueryData());
+        when(
+          () => contextHelperMock.getMediaQuery(context),
+        ).thenReturn(const MediaQueryData());
 
         expect(wm.topPadding, 16);
       },
@@ -70,7 +65,7 @@ void main() {
       (wm, tester, context) async {
         tester.init();
         wm.onRetryPressed();
-        verify(() => modelData.getWeather());
+        verify(modelData.getWeather);
       },
     );
   });

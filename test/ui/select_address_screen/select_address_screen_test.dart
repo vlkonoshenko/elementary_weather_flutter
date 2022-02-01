@@ -12,33 +12,36 @@ void main() {
   final selectAddressWm = SelectAddressWMMock();
 
   setUp(() {
-    when(() => selectAddressWm.predictions)
-        .thenAnswer((_) => ValueNotifier<List<Location>>([]));
-    when(() => selectAddressWm.searchFieldController)
-        .thenAnswer((_) => TextEditingController());
+    when(() => selectAddressWm.predictions).thenAnswer(
+      (_) => ValueNotifier<List<Location>>([]),
+    );
+    when(() => selectAddressWm.searchFieldController).thenAnswer(
+      (_) => TextEditingController(),
+    );
   });
 
   testGoldens('Select address screen default golden test', (tester) async {
     await tester.pumpWidgetBuilder(selectAddressScreen.build(selectAddressWm));
-
     await multiScreenGolden(tester, 'select_address_screen');
   });
 
   testGoldens('Select address screen with data golden test', (tester) async {
-    when(() => selectAddressWm.predictions)
-        .thenAnswer((_) => ValueNotifier<List<Location>>([_locationMock]));
+    when(() => selectAddressWm.predictions).thenAnswer(
+      (_) => ValueNotifier<List<Location>>(_locationMock),
+    );
 
     await tester.pumpWidgetBuilder(selectAddressScreen.build(selectAddressWm));
-
     await multiScreenGolden(tester, 'select_address_screen_data');
   });
 }
 
 class SelectAddressWMMock extends Mock implements ISelectAddressWm {}
 
-const _locationMock = Location(
-  title: 'title',
-  locationType: LocationType.city,
-  latLng: LatLng(longitude: 10.0, latitude: 10.0),
-  woeid: 1,
-);
+const _locationMock = [
+  Location(
+    title: 'title',
+    locationType: LocationType.city,
+    latLng: LatLng(longitude: 10.0, latitude: 10.0),
+    woeid: 1,
+  ),
+];

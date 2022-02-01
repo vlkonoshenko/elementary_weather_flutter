@@ -7,42 +7,43 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  late AddressServiceMock addressServiceMock;
+  final addressServiceMock = AddressServiceMock();
+  late SelectAddressModel model;
 
   setUp(() {
-    addressServiceMock = AddressServiceMock();
+    model = SelectAddressModel(addressServiceMock, AppModel());
+
+    when(() => addressServiceMock.getCityPredictions('')).thenAnswer(
+      (_) => Future.value([]),
+    );
+
+    when(() => addressServiceMock.getCityPredictions('Test')).thenAnswer(
+      (_) => Future.value(_locationMock),
+    );
+  });
+
+  test('init with empty list', () async {
+    expect(model.predictions.value, isEmpty);
   });
 
   test('getCityPrediction return empty list', () async {
-    when(() => addressServiceMock.getCityPredictions(''))
-        .thenAnswer((_) => Future.value([]));
-
-    final model = SelectAddressModel(addressServiceMock, AppModel());
-    expect(model.predictions.value, <Location>[]);
     await model.getCityPrediction('');
-
-    expect(model.predictions.value, <Location>[]);
+    expect(model.predictions.value, isEmpty);
   });
 
   test('getCityPrediction return prediction list', () async {
-    when(() => addressServiceMock.getCityPredictions(''))
-        .thenAnswer((_) => Future.value([_locationMock]));
-
-    final model = SelectAddressModel(addressServiceMock, AppModel());
-
-    expect(model.predictions.value, <Location>[]);
-    await model.getCityPrediction('');
-    expect(model.predictions.value, <Location>[_locationMock]);
+    await model.getCityPrediction('Test');
+    expect(model.predictions.value, same(_locationMock));
   });
 }
 
 class AddressServiceMock extends Mock implements AddressService {}
 
-class AppModelMock extends Mock implements AppModel {}
-
-const _locationMock = Location(
-  title: 'title',
-  locationType: LocationType.city,
-  latLng: LatLng(longitude: 10.0, latitude: 10.0),
-  woeid: 1,
-);
+const _locationMock = [
+  Location(
+    title: 'title',
+    locationType: LocationType.city,
+    latLng: LatLng(longitude: 10.0, latitude: 10.0),
+    woeid: 1,
+  ),
+];

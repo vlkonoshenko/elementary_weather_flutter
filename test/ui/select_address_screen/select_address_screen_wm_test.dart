@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  group('Init SelectAddressWM', () {
+  group('init select address screen wm', () {
     final getIt = GetIt.instance;
 
     setUp(() {
@@ -24,11 +24,11 @@ void main() {
     });
   });
 
-  group('Select address screen wm testing', () {
+  group('select address screen wm testing', () {
     late SelectAddressModelMock modelData;
     late NavigationHelperMock navigatorStateMock;
 
-    setUp(() {
+    SelectAddressWM setupWm() {
       modelData = SelectAddressModelMock();
       navigatorStateMock = NavigationHelperMock();
 
@@ -38,9 +38,7 @@ void main() {
       registerFallbackValue(MaterialPageRoute<void>(builder: (_) {
         return const Center();
       }));
-    });
 
-    SelectAddressWM setupWm() {
       return SelectAddressWM(modelData, navigatorStateMock);
     }
 
@@ -61,8 +59,8 @@ void main() {
       setupWm,
       (wm, tester, context) async {
         tester.init();
-        wm.searchFieldController.text = 'Test';
 
+        wm.searchFieldController.text = 'Test';
         verify(() => modelData.getCityPrediction(any()));
       },
     );

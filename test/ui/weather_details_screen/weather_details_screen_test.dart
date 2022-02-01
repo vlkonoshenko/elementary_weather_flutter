@@ -1,60 +1,44 @@
-import 'package:elementary_weather_flutter/service/context_helper.dart';
+import 'package:elementary/elementary.dart';
 import 'package:elementary_weather_flutter/service/model/location.dart';
 import 'package:elementary_weather_flutter/service/model/location_type.dart';
 import 'package:elementary_weather_flutter/service/model/weather.dart';
 import 'package:elementary_weather_flutter/service/model/weather_state.dart';
 import 'package:elementary_weather_flutter/ui/weather_details_screen/weather_screen.dart';
-import 'package:elementary_weather_flutter/ui/weather_details_screen/weather_screen_model.dart';
 import 'package:elementary_weather_flutter/ui/weather_details_screen/weather_screen_wm.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  group('WeatherDetailsScreen', () {
-    final model = WeatherScreenModelMock();
+  final wm = WeatherScreenWMMock();
+  const weatherScreen = WeatherScreen();
 
-    testGoldens('Example of testing a responsive layout', (tester) async {
-      when(model.getWeather).thenAnswer((_) => Future.value([_weatherMock]));
-      when(() => model.location).thenAnswer((_) => _locationMock);
+  setUp(() {
+    when(() => wm.topPadding).thenReturn(16);
 
-      await tester.pumpWidgetBuilder(WeatherScreen(
-        wmFactory: (context) => WeatherScreenWM(ContextHelper(), model),
-      ));
-
-      await multiScreenGolden(tester, 'weather_details_screen');
-    });
-
-    testGoldens('Weather details screen with data golden test', (tester) async {
-      when(model.getWeather).thenAnswer((_) {
-        return Future.value(_mockWeathers);
-      });
-      when(() => model.location).thenAnswer((_) => _locationMock);
-
-      await tester.pumpWidgetBuilder(WeatherScreen(
-        wmFactory: (context) => WeatherScreenWM(ContextHelper(), model),
-      ));
-
-      await multiScreenGolden(tester, 'weather_details_screen_data');
-    });
-
-    testGoldens(
-      'Weather details screen with error golden test',
-      (tester) async {
-        late WeatherScreenWM wm;
-        when(model.getWeather).thenThrow(Exception());
-        await tester.pumpWidgetBuilder(WeatherScreen(
-          wmFactory: (context) => wm = WeatherScreenWM(ContextHelper(), model),
-        ));
-
-        wm.onErrorHandle(Exception());
-        await multiScreenGolden(tester, 'weather_details_screen_err');
-      },
+    when(() => wm.currentWeather).thenReturn(
+      EntityStateNotifier.value(_mockWeathers),
     );
+
+    when(() => wm.locationTitle).thenReturn(_locationMock.title);
+  });
+
+  testGoldens('Weather details screen with data golden test', (tester) async {
+    await tester.pumpWidgetBuilder(weatherScreen.build(wm));
+    await multiScreenGolden(tester, 'weather_details_screen_data');
+  });
+
+  testGoldens('Weather details screen with error golden test', (tester) async {
+    when(() => wm.currentWeather).thenReturn(
+      EntityStateNotifier.value([])..error(Exception()),
+    );
+
+    await tester.pumpWidgetBuilder(weatherScreen.build(wm));
+    await multiScreenGolden(tester, 'weather_details_screen_err');
   });
 }
 
-class WeatherScreenModelMock extends Mock implements WeatherScreenModel {}
+class WeatherScreenWMMock extends Mock implements IWeatherWm {}
 
 final _weatherMock = Weather(
   id: 0,
