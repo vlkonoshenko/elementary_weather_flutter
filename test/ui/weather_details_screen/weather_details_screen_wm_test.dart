@@ -13,7 +13,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  group('init', () {
+  group('WeatherScreenWm init', () {
     final getIt = GetIt.instance;
 
     setUp(() {
@@ -36,7 +36,7 @@ void main() {
     }
 
     testWidgetModel<WeatherScreenWM, WeatherScreen>(
-      'wm init call getWeather',
+      'init call getWeather',
       setupWm,
       (wm, tester, context) async {
         tester.init();
