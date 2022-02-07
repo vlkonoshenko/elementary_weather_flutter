@@ -36,11 +36,10 @@ void main() {
     }
 
     testWidgetModel<WeatherScreenWM, WeatherScreen>(
-      'init call getWeather',
+      'getWeather called after init wm ',
       setupWm,
       (wm, tester, context) async {
         tester.init();
-
         verify(modelData.getWeather);
       },
     );

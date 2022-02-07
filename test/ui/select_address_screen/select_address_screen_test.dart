@@ -20,12 +20,12 @@ void main() {
     );
   });
 
-  testGoldens('Select address screen default golden test', (tester) async {
+  testGoldens('select address screen default golden test', (tester) async {
     await tester.pumpWidgetBuilder(selectAddressScreen.build(selectAddressWm));
     await multiScreenGolden(tester, 'select_address_screen');
   });
 
-  testGoldens('Select address screen with data golden test', (tester) async {
+  testGoldens('select address screen with data golden test', (tester) async {
     when(() => selectAddressWm.predictions).thenAnswer(
       (_) => ValueNotifier<List<Location>>(_locationMock),
     );

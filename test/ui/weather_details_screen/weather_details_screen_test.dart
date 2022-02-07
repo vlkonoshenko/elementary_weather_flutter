@@ -23,12 +23,12 @@ void main() {
     when(() => wm.locationTitle).thenReturn(_locationMock.title);
   });
 
-  testGoldens('Weather details screen with data golden test', (tester) async {
+  testGoldens('weather details screen with data golden test', (tester) async {
     await tester.pumpWidgetBuilder(weatherScreen.build(wm));
     await multiScreenGolden(tester, 'weather_details_screen_data');
   });
 
-  testGoldens('Weather details screen with error golden test', (tester) async {
+  testGoldens('weather details screen with error golden test', (tester) async {
     when(() => wm.currentWeather).thenReturn(
       EntityStateNotifier.value([])..error(Exception()),
     );
