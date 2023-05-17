@@ -32,7 +32,7 @@ class WeatherForecastTile extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         Text(
-          '${weather.maxTemp.round().toString()}°',
+          '${weather.maxTemp.round()}°',
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w700,

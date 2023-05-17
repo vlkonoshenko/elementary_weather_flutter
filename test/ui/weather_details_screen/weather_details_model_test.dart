@@ -20,8 +20,8 @@ void main() {
   });
 
   test('method getWeather return weather from weather service', () async {
-    when(() => weatherServiceMock.getWeather(any())).thenAnswer(
-      (invocation) => Future.value(_weatherMock),
+    when(() => weatherServiceMock.getWeather).thenAnswer(
+      (invocation) => () => Future.value(_weatherMock),
     );
 
     expect(await wm.getWeather(), same(_weatherMock));

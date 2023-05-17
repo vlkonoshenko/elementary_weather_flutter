@@ -1,4 +1,4 @@
-include: package:surf_lint_rules/analysis_options.yaml
+include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
@@ -6,32 +6,134 @@ analyzer:
     - "script/**"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-
+    - "**/generated_plugin_registrant.dart"
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  plugins:
+    - dart_code_metrics
+  errors:
+    avoid_dynamic_calls: error
+    avoid_empty_else: error
+    avoid_print: error
+    avoid_relative_lib_imports: error
+    avoid_returning_null_for_future: error
+    avoid_slow_async_io: error
+    avoid_type_to_string: error
+    avoid_types_as_parameter_names: error
+    avoid_web_libraries_in_flutter: error
+    cancel_subscriptions: error
+    close_sinks: error
+    comment_references: error
+    control_flow_in_finally: error
+    depend_on_referenced_packages: error
+    empty_statements: error
+    hash_and_equals: error
+    invariant_booleans: error
+    iterable_contains_unrelated_type: error
+    list_remove_unrelated_type: error
+    literal_only_boolean_expressions: error
+    no_adjacent_strings_in_list: error
+    no_duplicate_case_values: error
+    no_logic_in_create_state: error
+    prefer_void_to_null: error
+    test_types_in_equals: error
+    throw_in_finally: error
+    unnecessary_statements: error
+    unrelated_type_equality_checks: error
+    unsafe_html: error
+    use_build_context_synchronously: error
+    use_key_in_widget_constructors: error
+    valid_regexps: error
+  cannot-ignore:
+    - error
+    - avoid_dynamic_calls
+    - avoid_empty_else
+    - avoid_print
+    - avoid_relative_lib_imports
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - avoid_type_to_string
+    - avoid_types_as_parameter_names
+    - avoid_web_libraries_in_flutter
+    - cancel_subscriptions
+    - close_sinks
+    - comment_references
+    - control_flow_in_finally
+    - depend_on_referenced_packages
+    - empty_statements
+    - hash_and_equals
+    - invariant_booleans
+    - iterable_contains_unrelated_type
+    - list_remove_unrelated_type
+    - literal_only_boolean_expressions
+    - no_adjacent_strings_in_list
+    - no_duplicate_case_values
+    - no_logic_in_create_state
+    - prefer_void_to_null
+    - test_types_in_equals
+    - throw_in_finally
+    - unnecessary_statements
+    - unrelated_type_equality_checks
+    - unsafe_html
+    - use_build_context_synchronously
+    - use_key_in_widget_constructors
+    - valid_regexps
 dart_code_metrics:
-  metrics:
-    cyclomatic-complexity: 20
-    maximum-nesting-level: 5
-    number-of-parameters: 4
-    source-lines-of-code: 50
-    number-of-methods: 10
-    weight-of-class: 0.33
-    maintainability-index: 50
   anti-patterns:
     - long-method
     - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    maintainability-index: 50
+    maximum-nesting-level: 5
+    number-of-parameters: 4
+    source-lines-of-code: 50
+    technical-debt:
+      threshold: 1
+      todo-cost: 4
+      ignore-cost: 8
+      ignore-for-file-cost: 16
+      as-dynamic-cost: 16
+      deprecated-annotations-cost: 2
+      file-nullsafety-migration-cost: 2
+      unit-type: "hours"
+    number-of-methods: 10
+    weight-of-class: 0.33
   metrics-exclude:
+    - integration_test/**
     - test/**
+  rules-exclude:
+    - lib/ui/res/**
+    - lib/src/tag_icons/**
+    - lib/src/ui/res/**
   rules:
+    - avoid-collection-methods-with-unrelated-types
     - always-remove-listener
+    - avoid-border-all
+    - avoid-dynamic
+    - avoid-global-state
+    - avoid-missing-enum-constant-in-map
     - avoid-nested-conditional-expressions:
         acceptable-level: 2
-    - avoid-unused-parameters
+    - avoid-returning-widgets:
+        exclude:
+          - test/**
+    - avoid-throw-in-catch-block
     - avoid-unnecessary-setstate
-    - avoid-wrapping-in-padding
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters
+    - avoid-non-null-assertion
+    - binary-expression-operand-order
     - double-literal-format
     - newline-before-return
     - no-boolean-literal-compare
     - no-empty-block
+    - no-equal-then-else
+    - prefer-conditional-expressions
     - prefer-const-border-radius
     - prefer-correct-identifier-length:
         exceptions:
@@ -39,23 +141,133 @@ dart_code_metrics:
           - qa
         exclude:
           - test/**
+          - lib/modules/transfers/screens/bill_payments/api/dto/bill_status_dto.dart
     - prefer-correct-type-name
-    - prefer_extracting_callbacks
+    - prefer-extracting-callbacks
+    - prefer-first
+    - prefer-intl-name
+    - prefer-last
     - prefer-match-file-name:
         exclude:
           - test/**
-    - prefer-first
-    - prefer-last
     - prefer-single-widget-per-file
-    - prefer-conditional-expressions
-    - prefer-intl-name
     - provide-correct-intl-args
+    - member-ordering:
+        order:
+          - public-static-const-fields
+          - private-static-const-fields
+          - public-static-final-fields
+          - private-static-final-fields
+          - public-static-fields
+          - private-static-fields
+          - public-final-fields
+          - private-final-fields
+          - public-fields
+          - public-getters-setters
+          - private-fields
+          - private-getters-setters
+          - constructors
+          - named-constructors
+          - factory-constructors
+          - overridden-methods
+          - public-static-methods
+          - public-methods
+          - protected-methods
+          - private-static-methods
+          - private-methods
 
 linter:
   rules:
+    
+    always_use_package_imports: true
+    avoid_dynamic_calls: true
+    avoid_returning_null_for_future: true
+    avoid_slow_async_io: true
+    avoid_type_to_string: true
+    cancel_subscriptions: true
+    close_sinks: true
+    comment_references: true
+    literal_only_boolean_expressions: true
+    no_adjacent_strings_in_list: true
+    test_types_in_equals: true
+    throw_in_finally: true
+    unnecessary_statements: true
+    unsafe_html: true
+
+    
+    always_declare_return_types: true
     always_put_required_named_parameters_first: false
-    always_use_package_imports: false
-    depend_on_referenced_packages: true
+    avoid_annotating_with_dynamic: true
+    avoid_bool_literals_in_conditional_expressions: true
+    avoid_catches_without_on_clauses: true
+    avoid_catching_errors: true
+    avoid_equals_and_hash_code_on_mutable_classes: true
+    avoid_escaping_inner_quotes: true
+    avoid_field_initializers_in_const_classes: true
+    avoid_final_parameters: true
+    avoid_implementing_value_types: true
+    avoid_js_rounded_ints: true
+    avoid_multiple_declarations_per_line: true
+    avoid_positional_boolean_parameters: false
+    avoid_private_typedef_functions: true
+    avoid_redundant_argument_values: true
+    avoid_returning_null: true
+    avoid_returning_this: true
+    avoid_setters_without_getters: true
+    avoid_types_on_closure_parameters: true
+    avoid_unused_constructor_parameters: true
+    avoid_void_async: true
+    cascade_invocations: true
+    conditional_uri_does_not_exist: true
+    deprecated_consistency: true
+    directives_ordering: true
+    do_not_use_environment: true
     eol_at_end_of_file: true
+    flutter_style_todos: true
+    leading_newlines_in_multiline_strings: true
+    lines_longer_than_80_chars: false
+    missing_whitespace_between_adjacent_strings: true
+    no_leading_underscores_for_local_identifiers: true
+    no_runtimeType_toString: true
     noop_primitive_operations: true
+    omit_local_variable_types: true
+    one_member_abstracts: true
+    only_throw_errors: true
+    package_api_docs: true
+    parameter_assignments: true
+    prefer_asserts_in_initializer_lists: true
+    prefer_constructors_over_static_methods: true
+    prefer_expression_function_bodies: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_if_elements_to_conditional_expressions: true
+    prefer_mixin: false
+    prefer_single_quotes: true
+    public_member_api_docs: false
+    require_trailing_commas: true
+    sized_box_shrink_expand: true
+    sort_constructors_first: false
+    sort_unnamed_constructors_first: false
+    type_annotate_public_apis: true
+    unawaited_futures: true
+    unnecessary_await_in_return: true
+    unnecessary_lambdas: true
+    unnecessary_null_checks: true
+    unnecessary_parenthesis: true
+    unnecessary_raw_strings: true
+    use_colored_box: true
+    use_decorated_box: true
+    use_if_null_to_convert_nulls_to_bools: true
+    use_is_even_rather_than_modulo: true
+    use_late_for_private_fields_and_variables: true
+    use_named_constants: true
+    use_raw_strings: true
+    use_setters_to_change_properties: true
+    use_string_buffers: true
+    use_super_parameters: true
     use_test_throws_matchers: true
+    use_to_and_as_if_applicable: true
+
+    
+    secure_pubspec_urls: true
+    sort_pub_dependencies: true

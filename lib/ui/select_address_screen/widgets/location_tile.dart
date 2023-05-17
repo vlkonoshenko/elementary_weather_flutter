@@ -1,12 +1,11 @@
 import 'package:elementary_weather_flutter/service/model/location.dart';
+import 'package:elementary_weather_flutter/ui/select_address_screen/widgets/highlighted_text.dart';
 import 'package:flutter/material.dart';
-
-import 'highlighted_text.dart';
 
 class LocationTile extends StatelessWidget {
   final Location location;
   final String requestString;
-  final Function(Location)? onClick;
+  final void Function(Location)? onClick;
 
   const LocationTile({
     Key? key,
@@ -16,18 +15,16 @@ class LocationTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 40),
-      title: HighlightedText(
-        text: location.title,
-        matcher: requestString,
-      ),
-      onTap: () {
-        if (onClick != null) {
-          onClick!(location);
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 40),
+        title: HighlightedText(
+          text: location.title,
+          matcher: requestString,
+        ),
+        onTap: () {
+          if (onClick != null) {
+            onClick!(location);
+          }
+        },
+      );
 }

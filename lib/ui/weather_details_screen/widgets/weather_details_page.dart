@@ -69,7 +69,7 @@ class WeatherDetailsPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
-                  '${data.first.theTemp.round().toString()}°',
+                  '${data.first.theTemp.round()}°',
                   style: const TextStyle(
                     fontSize: 60,
                     fontWeight: FontWeight.bold,

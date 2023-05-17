@@ -12,7 +12,7 @@ import 'weather_screen_model.dart';
 class WeatherScreenWM extends WidgetModel<WeatherScreen, WeatherScreenModel>
     implements IWeatherWm {
   final EntityStateNotifier<List<Weather>?> _currentWeather =
-      EntityStateNotifier(null);
+      EntityStateNotifier();
   final ContextHelper _contextHelper;
 
   @override

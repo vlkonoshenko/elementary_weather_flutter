@@ -17,8 +17,8 @@ class SelectAddressModel extends ElementaryModel {
     _appModel.selectedLocation = location;
   }
 
-  Future<void> getCityPrediction(String text) async {
-    final value = await _addressService.getCityPredictions(text);
+  Future<void> getCityPrediction(String _) async {
+    final value = await _addressService.getCityPredictions();
     predictions.value = value;
   }
 }

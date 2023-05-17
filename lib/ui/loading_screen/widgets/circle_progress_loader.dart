@@ -4,10 +4,10 @@ class CircleProgressLoader extends StatefulWidget {
   const CircleProgressLoader({Key? key}) : super(key: key);
 
   @override
-  _CircleProgressLoaderState createState() => _CircleProgressLoaderState();
+  CircleProgressLoaderState createState() => CircleProgressLoaderState();
 }
 
-class _CircleProgressLoaderState extends State<CircleProgressLoader>
+class CircleProgressLoaderState extends State<CircleProgressLoader>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 

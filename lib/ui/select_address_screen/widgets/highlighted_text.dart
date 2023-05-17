@@ -11,19 +11,6 @@ class HighlightedText extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final spans = matcher.isNotEmpty
-        ? _highlightOccurrences(text, matcher)
-        : <TextSpan>[];
-
-    return Text.rich(RichText(
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      text: spans.isNotEmpty ? TextSpan(children: spans) : TextSpan(text: text),
-    ).text);
-  }
-
   List<TextSpan> _highlightOccurrences(
     String source,
     String query,
@@ -78,5 +65,18 @@ class HighlightedText extends StatelessWidget {
     }
 
     return spans;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final spans = matcher.isNotEmpty
+        ? _highlightOccurrences(text, matcher)
+        : <TextSpan>[];
+
+    return Text.rich(RichText(
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      text: spans.isNotEmpty ? TextSpan(children: spans) : TextSpan(text: text),
+    ).text);
   }
 }

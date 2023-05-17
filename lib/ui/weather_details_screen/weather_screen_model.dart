@@ -12,6 +12,6 @@ class WeatherScreenModel extends ElementaryModel {
   WeatherScreenModel(this._weatherService, this._location);
 
   Future<List<Weather>?> getWeather() async {
-    return _weatherService.getWeather(location?.woeid ?? 0);
+    return _weatherService.getWeather();
   }
 }

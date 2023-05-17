@@ -15,15 +15,15 @@ void main() {
   });
 
   test('init with empty list', () async {
-    when(() => addressServiceMock.getCityPredictions('')).thenAnswer(
-      (_) => Future.value([]),
+    when(() => addressServiceMock.getCityPredictions).thenAnswer(
+      (_) => () => Future.value([]),
     );
     expect(model.predictions.value, isEmpty);
   });
 
   test('getCityPrediction return empty list', () async {
-    when(() => addressServiceMock.getCityPredictions('Test')).thenAnswer(
-      (_) => Future.value(_locationMock),
+    when(() => addressServiceMock.getCityPredictions).thenAnswer(
+      (_) => () => Future.value(_locationMock),
     );
     await model.getCityPrediction('');
     expect(model.predictions.value, isEmpty);

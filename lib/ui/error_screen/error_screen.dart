@@ -43,9 +43,7 @@ class ErrorScreen extends StatelessWidget {
                 style: AppTypography.title,
               ),
               style: TextButton.styleFrom(
-                primary: Colors.white,
                 backgroundColor: const Color(0xff49A5C1),
-                onSurface: Colors.grey,
                 elevation: 10,
                 shadowColor: const Color(0xff49A5C1),
                 shape: const RoundedRectangleBorder(

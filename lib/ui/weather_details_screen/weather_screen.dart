@@ -14,25 +14,18 @@ class WeatherScreen extends ElementaryWidget<IWeatherWm> {
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(IWeatherWm wm) {
-    return Scaffold(
-      body: Center(
-        child: EntityStateNotifierBuilder<List<Weather>?>(
-          listenableEntityState: wm.currentWeather,
-          errorBuilder: (_, __, ___) {
-            return ErrorScreen(onRetryPressed: wm.onRetryPressed);
-          },
-          loadingBuilder: (_, __) {
-            return const LoadingPage();
-          },
-          builder: (_, data) {
-            return WeatherDetailsPage(
-              data: data!,
+  Widget build(IWeatherWm wm) => Scaffold(
+        body: Center(
+          child: EntityStateNotifierBuilder<List<Weather>?>(
+            listenableEntityState: wm.currentWeather,
+            errorBuilder: (_, __, ___) =>
+                ErrorScreen(onRetryPressed: wm.onRetryPressed),
+            loadingBuilder: (_, __) => const LoadingPage(),
+            builder: (_, data) => WeatherDetailsPage(
+              data: data ?? [],
               location: wm.locationTitle,
-            );
-          },
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
